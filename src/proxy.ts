@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function proxy(request: NextRequest) {
-  const password = process.env.NEXT_PUBLIC_SITE_PASSWORD;
+  const password = process.env.SITE_PASSWORD;
 
   // If no password is set, allow through (e.g. production)
   if (!password) {

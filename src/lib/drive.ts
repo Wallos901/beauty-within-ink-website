@@ -11,10 +11,10 @@ export interface DriveImage {
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
 function getAuth() {
-  const credentials = process.env.NEXT_PUBLIC_GOOGLE_SERVICE_ACCOUNT_JSON;
+  const credentials = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
   if (!credentials) {
     throw new Error(
-      "Missing NEXT_PUBLIC_GOOGLE_SERVICE_ACCOUNT_JSON environment variable.",
+      "Missing GOOGLE_SERVICE_ACCOUNT_JSON environment variable.",
     );
   }
 

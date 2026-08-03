@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const revalidate = 0;
 
 export default async function GalleryPage() {
-  const folderId = process.env.NEXT_PUBLIC_DRIVE_GALLERY_FOLDER_ID;
+  const folderId = process.env.DRIVE_GALLERY_FOLDER_ID;
 
   const images = folderId
     ? await listDriveImages(folderId).catch((err) => {
