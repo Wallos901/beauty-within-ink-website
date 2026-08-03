@@ -33,7 +33,8 @@ const SERVICES = [
   },
 ];
 
-export const revalidate = process.env.NODE_ENV === "development" ? 0 : 3600;
+// Always fetch fresh — images are served from the Drive API route which has its own cache headers
+export const revalidate = 0;
 
 export default async function HomePage() {
   // Fetch artist photo and gallery previews in parallel

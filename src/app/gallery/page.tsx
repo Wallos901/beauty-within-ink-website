@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     "Browse fine line tattoo work by Beauty Within Ink — delicate botanicals, custom pieces, and minimalist designs.",
 };
 
-// In production, revalidate every hour. In dev, always fetch fresh.
-export const revalidate = process.env.NODE_ENV === "development" ? 0 : 3600;
+// Always fetch fresh — images are served from the Drive API route which has its own cache headers
+export const revalidate = 0;
 
 export default async function GalleryPage() {
   const folderId = process.env.DRIVE_GALLERY_FOLDER_ID;
