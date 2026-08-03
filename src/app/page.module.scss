@@ -3,7 +3,7 @@
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 .hero {
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   background: linear-gradient(
     160deg,
     $cream 0%,
@@ -14,13 +14,12 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: $spacing-xl $spacing-md;
+  padding: calc(80px + #{$spacing-xl}) $spacing-md $spacing-xl;
 
   @include mobile {
-    min-height: 88vh;
-    padding: $spacing-lg $spacing-sm;
+    min-height: 100vh;
+    padding: calc(80px + #{$spacing-lg}) $spacing-sm $spacing-xl;
     align-items: flex-end;
-    padding-bottom: $spacing-xl;
   }
 }
 

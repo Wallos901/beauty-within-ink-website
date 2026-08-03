@@ -12,16 +12,8 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -30,11 +22,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={[
-        styles.navbar,
-        scrolled || !isHome ? styles.solid : "",
-        menuOpen ? styles.menuOpen : "",
-      ]
+      className={[styles.navbar, menuOpen ? styles.menuOpen : ""]
         .filter(Boolean)
         .join(" ")}
     >

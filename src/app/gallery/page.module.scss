@@ -3,12 +3,12 @@
 
 // ─── Page hero ────────────────────────────────────────────────────────────────
 .hero {
-  padding: $spacing-xl $spacing-md $spacing-lg;
+  padding: calc(80px + #{$spacing-xl}) $spacing-md $spacing-lg;
   background: linear-gradient(160deg, $cream 0%, $blush-light 100%);
   text-align: center;
 
   @include mobile {
-    padding: $spacing-lg $spacing-sm $spacing-md;
+    padding: calc(80px + #{$spacing-lg}) $spacing-sm $spacing-md;
   }
 }
 
