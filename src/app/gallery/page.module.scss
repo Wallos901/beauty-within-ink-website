@@ -1,0 +1,107 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// ─── Page hero ────────────────────────────────────────────────────────────────
+.hero {
+  padding: $spacing-xl $spacing-md $spacing-lg;
+  background: linear-gradient(160deg, $cream 0%, $blush-light 100%);
+  text-align: center;
+
+  @include mobile {
+    padding: $spacing-lg $spacing-sm $spacing-md;
+  }
+}
+
+.heroInner {
+  @include container;
+  max-width: 600px;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 1.05rem;
+    color: $gray;
+    margin-top: 0.5rem;
+  }
+}
+
+// ─── Grid section ─────────────────────────────────────────────────────────────
+.gridSection {
+  padding: $spacing-xl $spacing-md;
+  background-color: $cream;
+
+  @include mobile {
+    padding: $spacing-lg $spacing-sm;
+  }
+}
+
+.gridInner {
+  @include container;
+}
+
+// ─── Masonry-style grid ───────────────────────────────────────────────────────
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+
+  // Alternate row heights for a staggered feel
+  & > :nth-child(3n + 2) {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: #{$bp-desktop - 1px}) {
+    grid-template-columns: repeat(2, 1fr);
+
+    & > :nth-child(3n + 2) {
+      margin-top: 0;
+    }
+
+    & > :nth-child(2n) {
+      margin-top: 2rem;
+    }
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+
+    & > * {
+      margin-top: 0 !important;
+    }
+  }
+}
+
+.gridItem {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: $radius-md;
+  transition: $transition-slow;
+
+  &:hover {
+    .placeholder {
+      transform: scale(1.04);
+    }
+  }
+}
+
+// ─── Placeholder (replace with <Image> when photos are available) ─────────────
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    145deg,
+    $blush-light 0%,
+    $blush 42%,
+    rgba($rose, 0.5) 100%
+  );
+  @include flex-center;
+  color: $mauve;
+  font-family: $font-body;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  transition: transform 0.5s ease;
+}

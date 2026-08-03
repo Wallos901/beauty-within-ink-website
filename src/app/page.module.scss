@@ -1,0 +1,378 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+// ─── Hero ─────────────────────────────────────────────────────────────────────
+.hero {
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(
+    160deg,
+    $cream 0%,
+    $blush-light 55%,
+    rgba($blush, 0.3) 100%
+  );
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: $spacing-xl $spacing-md;
+
+  @include mobile {
+    min-height: 88vh;
+    padding: $spacing-lg $spacing-sm;
+    align-items: flex-end;
+    padding-bottom: $spacing-xl;
+  }
+}
+
+.heroContent {
+  @include container;
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+}
+
+.eyebrow {
+  display: block;
+  font-family: $font-body;
+  font-size: 0.68rem;
+  font-weight: 300;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: $mauve;
+  margin-bottom: 1.75rem;
+}
+
+.heroTitle {
+  color: $plum;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+
+  em {
+    font-style: italic;
+    color: $mauve;
+  }
+}
+
+.heroSubtitle {
+  font-size: 1.125rem;
+  color: $gray;
+  margin-bottom: 2.75rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.heroCta {
+  display: flex;
+  gap: 1.125rem;
+  flex-wrap: wrap;
+}
+
+// ─── Decorative background elements ──────────────────────────────────────────
+.heroDecor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  @include mobile {
+    opacity: 0.5;
+  }
+}
+
+.decorCircle {
+  position: absolute;
+  right: -8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba($blush, 0.38) 0%,
+    rgba($rose, 0.12) 45%,
+    transparent 72%
+  );
+}
+
+.decorLine {
+  position: absolute;
+  right: 22%;
+  top: 15%;
+  width: 1px;
+  height: 65%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba($rose, 0.25),
+    transparent
+  );
+}
+
+.decorDot {
+  position: absolute;
+  right: 28%;
+  top: 35%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: $rose;
+  opacity: 0.45;
+}
+
+// ─── Shared button classes ────────────────────────────────────────────────────
+.btnPrimary {
+  @include button-primary;
+}
+
+.btnOutline {
+  @include button-outline;
+}
+
+.btnOutlineSm {
+  @include button-outline;
+  display: inline-block;
+  margin-top: $spacing-md;
+}
+
+// ─── About ────────────────────────────────────────────────────────────────────
+.about {
+  padding: $spacing-xxl $spacing-md;
+  background-color: $white;
+
+  @include mobile {
+    padding: $spacing-xl $spacing-sm;
+  }
+}
+
+.aboutInner {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: $spacing-lg;
+  align-items: center;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aboutImage {
+  aspect-ratio: 4 / 5;
+
+  @include mobile {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+.imgPlaceholder {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  background: linear-gradient(
+    145deg,
+    $blush-light 0%,
+    $blush 45%,
+    rgba($rose, 0.4) 100%
+  );
+  border-radius: $radius-md;
+  @include flex-center;
+  color: $mauve;
+  font-family: $font-body;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+
+  @include mobile {
+    min-height: 240px;
+  }
+}
+
+.aboutContent {
+  h2 {
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 1.0625rem;
+  }
+}
+
+// ─── Services ────────────────────────────────────────────────────────────────
+.services {
+  padding: $spacing-xxl $spacing-md;
+  background-color: $cream;
+
+  @include mobile {
+    padding: $spacing-xl $spacing-sm;
+  }
+}
+
+.servicesInner {
+  @include container;
+  text-align: center;
+}
+
+.sectionTitle {
+  margin-bottom: 0;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: $spacing-lg;
+
+  @media (max-width: #{$bp-desktop - 1px}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-sm;
+  }
+}
+
+.serviceCard {
+  background-color: $white;
+  border: 1px solid rgba($rose, 0.2);
+  border-radius: $radius-md;
+  padding: 2.5rem 1.75rem;
+  text-align: center;
+  transition: $transition;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-5px);
+    border-color: rgba($rose, 0.5);
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin: 0.875rem 0 0.75rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+}
+
+.serviceIcon {
+  display: block;
+  font-size: 1.375rem;
+  color: $rose;
+}
+
+// ─── Gallery Preview ─────────────────────────────────────────────────────────
+.galleryPreview {
+  padding: $spacing-xxl $spacing-md;
+  background-color: $gray-light;
+
+  @include mobile {
+    padding: $spacing-xl $spacing-sm;
+  }
+}
+
+.galleryPreviewInner {
+  @include container;
+  text-align: center;
+}
+
+.previewGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: $spacing-lg;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.previewItem {
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(
+    145deg,
+    $blush-light 0%,
+    $blush 42%,
+    rgba($rose, 0.48) 100%
+  );
+  border-radius: $radius-md;
+  @include flex-center;
+  color: $mauve;
+  font-family: $font-body;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: $transition-slow;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.025);
+    box-shadow: $shadow-lg;
+  }
+}
+
+.previewCta {
+  margin-top: 3rem;
+}
+
+// ─── CTA Banner ───────────────────────────────────────────────────────────────
+.ctaBanner {
+  padding: $spacing-xxl $spacing-md;
+  background: linear-gradient(145deg, $plum 0%, $charcoal 100%);
+  text-align: center;
+
+  @include mobile {
+    padding: $spacing-xl $spacing-sm;
+  }
+}
+
+.ctaBannerInner {
+  @include container;
+  max-width: 700px;
+
+  h2 {
+    color: $cream;
+    margin-bottom: 1.25rem;
+  }
+
+  p {
+    color: rgba($cream, 0.65);
+    margin-bottom: 2.75rem;
+    font-size: 1.05rem;
+  }
+}
+
+.ctaBtns {
+  display: flex;
+  gap: 1.125rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btnPrimaryLight {
+  @include button-primary;
+  background-color: $rose;
+  border-color: $rose;
+
+  &:hover {
+    background-color: $mauve;
+    border-color: $mauve;
+  }
+}
+
+.btnOutlineLight {
+  @include button-outline;
+  color: rgba($cream, 0.9);
+  border-color: rgba($cream, 0.4);
+
+  &:hover {
+    background-color: rgba($cream, 0.08);
+    color: $cream;
+    border-color: rgba($cream, 0.7);
+    transform: translateY(-2px);
+    box-shadow: none;
+  }
+}

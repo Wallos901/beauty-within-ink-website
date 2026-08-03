@@ -1,0 +1,166 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// ─── Navbar Shell ────────────────────────────────────────────────────────────
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.75rem 0;
+  transition:
+    padding 0.4s ease,
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
+
+  &.solid {
+    background-color: rgba($cream, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1.1rem 0;
+    box-shadow: 0 1px 20px rgba($mauve, 0.08);
+  }
+
+  &.menuOpen {
+    background-color: $cream;
+  }
+}
+
+// ─── Inner layout ────────────────────────────────────────────────────────────
+.inner {
+  @include container;
+  @include flex-between;
+}
+
+// ─── Logo ────────────────────────────────────────────────────────────────────
+.logo {
+  font-family: $font-heading;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+  color: $plum;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: $transition;
+  white-space: nowrap;
+
+  &:hover {
+    color: $mauve;
+  }
+}
+
+// ─── Desktop nav links ───────────────────────────────────────────────────────
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+
+  @include mobile {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: $cream;
+    padding: 2rem $spacing-md;
+    gap: 1.5rem;
+    box-shadow: 0 8px 24px rgba($mauve, 0.1);
+
+    &.open {
+      display: flex;
+    }
+  }
+}
+
+.link {
+  font-family: $font-body;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $plum;
+  text-decoration: none;
+  position: relative;
+  transition: $transition;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: $rose;
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    color: $mauve;
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &.active {
+    color: $mauve;
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+// ─── Consent CTA button ──────────────────────────────────────────────────────
+.consentBtn {
+  @include button-primary;
+  font-size: 0.72rem;
+  padding: 0.6rem 1.375rem;
+}
+
+// ─── Hamburger (mobile) ──────────────────────────────────────────────────────
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+
+  @include mobile {
+    display: flex;
+  }
+
+  span {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background-color: $plum;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  &.active {
+    span:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+  }
+}

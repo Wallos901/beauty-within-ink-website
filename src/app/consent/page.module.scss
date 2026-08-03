@@ -1,0 +1,296 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// ─── Hero ─────────────────────────────────────────────────────────────────────
+.hero {
+  padding: $spacing-xl $spacing-md $spacing-lg;
+  background: linear-gradient(160deg, $cream 0%, $blush-light 100%);
+  text-align: center;
+
+  @include mobile {
+    padding: $spacing-lg $spacing-sm $spacing-md;
+  }
+}
+
+.heroInner {
+  @include container;
+  max-width: 640px;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 1.05rem;
+    color: $gray;
+    margin-top: 0.5rem;
+  }
+}
+
+// ─── Form section ─────────────────────────────────────────────────────────────
+.formSection {
+  padding: $spacing-xl $spacing-md $spacing-xxl;
+  background-color: $cream;
+
+  @include mobile {
+    padding: $spacing-lg $spacing-sm $spacing-xl;
+  }
+}
+
+.formWrap {
+  @include container;
+  max-width: 860px;
+}
+
+// ─── Form shell ───────────────────────────────────────────────────────────────
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+// ─── Fieldsets ────────────────────────────────────────────────────────────────
+.fieldset {
+  background-color: $white;
+  border: 1px solid rgba($rose, 0.18);
+  border-radius: $radius-lg;
+  padding: 2.25rem 2.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.375rem;
+
+  @include mobile {
+    padding: 1.5rem;
+  }
+}
+
+.legend {
+  font-family: $font-heading;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: $plum;
+  padding: 0 0.5rem;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.01em;
+}
+
+.fieldsetNote {
+  font-size: 0.875rem;
+  color: $gray;
+  background-color: rgba($blush, 0.15);
+  border-left: 2px solid $rose;
+  padding: 0.75rem 1rem;
+  border-radius: 0 $radius-sm $radius-sm 0;
+  margin-top: -0.5rem;
+  line-height: 1.65;
+}
+
+// ─── Field groups ────────────────────────────────────────────────────────────
+.formGroup {
+  @include form-field;
+}
+
+.formRow2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formRow3 {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.25rem;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Conditional reveal field ─────────────────────────────────────────────────
+.conditional {
+  background-color: rgba($blush-light, 0.5);
+  border-radius: $radius-sm;
+  padding: 1rem;
+  margin-top: -0.5rem;
+  border: 1px solid rgba($rose, 0.2);
+}
+
+// ─── Yes/No radio rows ───────────────────────────────────────────────────────
+.yesNoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background-color: $cream;
+  border-radius: $radius-sm;
+  flex-wrap: wrap;
+}
+
+.yesNoQuestion {
+  font-size: 0.9375rem;
+  color: $charcoal;
+  flex: 1;
+  min-width: 200px;
+  line-height: 1.55;
+}
+
+.yesNoOptions {
+  display: flex;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: $font-body;
+  font-size: 0.875rem;
+  color: $plum;
+  cursor: pointer;
+
+  input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: $mauve;
+    cursor: pointer;
+  }
+}
+
+// ─── Waiver box ───────────────────────────────────────────────────────────────
+.waiverBox {
+  max-height: 280px;
+  overflow-y: auto;
+  background-color: $cream;
+  border: 1px solid rgba($rose, 0.25);
+  border-radius: $radius-sm;
+  padding: 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: $rose $blush-light;
+
+  &:focus {
+    outline: 2px solid $mauve;
+    outline-offset: 2px;
+  }
+}
+
+.waiverText {
+  font-family: $font-body;
+  font-size: 0.8125rem;
+  line-height: 1.85;
+  color: $gray;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+// ─── Checkboxes ───────────────────────────────────────────────────────────────
+.checkRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: $mauve;
+    cursor: pointer;
+  }
+
+  label {
+    font-size: 0.9375rem;
+    color: $charcoal;
+    line-height: 1.6;
+    cursor: pointer;
+
+    span {
+      color: $rose;
+    }
+  }
+}
+
+// ─── Signature input ──────────────────────────────────────────────────────────
+.signatureInput {
+  font-family: $font-heading !important;
+  font-size: 1.25rem !important;
+  font-style: italic;
+  color: $plum !important;
+  letter-spacing: 0.02em;
+}
+
+// ─── Success card ─────────────────────────────────────────────────────────────
+.successCard {
+  background-color: $white;
+  border: 1px solid rgba($rose, 0.25);
+  border-radius: $radius-lg;
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  max-width: 860px;
+
+  h2 {
+    margin: 1.25rem 0 1rem;
+  }
+
+  p {
+    font-size: 1.0625rem;
+    max-width: 480px;
+    margin: 0 auto 2rem;
+
+    strong {
+      color: $plum;
+      font-weight: 500;
+    }
+  }
+}
+
+.successIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: rgba($blush, 0.35);
+  color: $mauve;
+  font-size: 1.375rem;
+  @include flex-center;
+  margin: 0 auto;
+}
+
+.resetBtn {
+  @include button-outline;
+  border: none;
+}
+
+// ─── Feedback messages ────────────────────────────────────────────────────────
+.errorMsg {
+  font-size: 0.9rem;
+  color: #8b3a3a;
+  background-color: rgba(#f2c4c4, 0.3);
+  border: 1px solid rgba(#e8a0a0, 0.4);
+  border-radius: $radius-sm;
+  padding: 0.875rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+// ─── Submit ───────────────────────────────────────────────────────────────────
+.submitBtn {
+  @include button-primary;
+  width: 100%;
+  font-size: 0.875rem;
+  padding: 1.1rem;
+  border: none;
+  text-align: center;
+}
+
+.formDisclaimer {
+  font-size: 0.75rem;
+  color: rgba($gray, 0.65);
+  text-align: center;
+  line-height: 1.7;
+  margin-top: 0.75rem;
+}

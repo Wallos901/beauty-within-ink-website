@@ -1,0 +1,161 @@
+@use "sass:color";
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// ─── Hero ─────────────────────────────────────────────────────────────────────
+.hero {
+  padding: $spacing-xl $spacing-md $spacing-lg;
+  background: linear-gradient(160deg, $cream 0%, $blush-light 100%);
+  text-align: center;
+
+  @include mobile {
+    padding: $spacing-lg $spacing-sm $spacing-md;
+  }
+}
+
+.heroInner {
+  @include container;
+  max-width: 600px;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 1.05rem;
+    color: $gray;
+    margin-top: 0.5rem;
+  }
+}
+
+// ─── Contact section ──────────────────────────────────────────────────────────
+.contactSection {
+  padding: $spacing-xl $spacing-md $spacing-xxl;
+  background-color: $cream;
+
+  @include mobile {
+    padding: $spacing-lg $spacing-sm $spacing-xl;
+  }
+}
+
+.contactInner {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: $spacing-lg;
+  align-items: start;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Info panel ───────────────────────────────────────────────────────────────
+.info {
+  h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    margin-bottom: 1.25rem;
+  }
+
+  > p {
+    font-size: 1rem;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.infoCards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.infoCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.25rem 1.5rem;
+  background-color: $white;
+  border-left: 2px solid $rose;
+  border-radius: 0 $radius-sm $radius-sm 0;
+}
+
+.infoLabel {
+  font-family: $font-body;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: $rose;
+}
+
+.infoValue {
+  font-size: 0.9rem;
+  color: $gray;
+  line-height: 1.6;
+
+  a {
+    color: $mauve;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: $mauve-dark;
+    }
+  }
+}
+
+// ─── Form ────────────────────────────────────────────────────────────────────
+.form {
+  background-color: $white;
+  border: 1px solid rgba($rose, 0.18);
+  border-radius: $radius-lg;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @include mobile {
+    padding: 1.5rem;
+  }
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formGroup {
+  @include form-field;
+}
+
+// ─── Feedback messages ───────────────────────────────────────────────────────
+.successMsg {
+  font-size: 0.9rem;
+  color: color.adjust($mauve, $lightness: -10%);
+  background-color: rgba($blush, 0.25);
+  border: 1px solid rgba($rose, 0.3);
+  border-radius: $radius-sm;
+  padding: 0.875rem 1.25rem;
+}
+
+.errorMsg {
+  font-size: 0.9rem;
+  color: #8b3a3a;
+  background-color: rgba(#f2c4c4, 0.3);
+  border: 1px solid rgba(#e8a0a0, 0.4);
+  border-radius: $radius-sm;
+  padding: 0.875rem 1.25rem;
+}
+
+// ─── Submit button ───────────────────────────────────────────────────────────
+.submitBtn {
+  @include button-primary;
+  width: 100%;
+  text-align: center;
+  border: none;
+}
