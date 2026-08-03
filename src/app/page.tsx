@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { listDriveImages } from "@/lib/drive";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
@@ -31,7 +33,27 @@ const SERVICES = [
   },
 ];
 
-export default function HomePage() {
+export const revalidate = process.env.NODE_ENV === "development" ? 0 : 3600;
+
+export default async function HomePage() {
+  // Fetch artist photo and gallery previews in parallel
+  const [artistImages, galleryImages] = await Promise.all([
+    process.env.DRIVE_ARTIST_FOLDER_ID
+      ? listDriveImages(process.env.DRIVE_ARTIST_FOLDER_ID).catch((err) => {
+          console.error("[home] Drive artist fetch failed:", err);
+          return [];
+        })
+      : Promise.resolve([]),
+    process.env.DRIVE_GALLERY_FOLDER_ID
+      ? listDriveImages(process.env.DRIVE_GALLERY_FOLDER_ID).catch((err) => {
+          console.error("[home] Drive gallery fetch failed:", err);
+          return [];
+        })
+      : Promise.resolve([]),
+  ]);
+
+  const artistPhoto = artistImages[0] ?? null;
+  const previewItems = galleryImages.slice(0, 3);
   return (
     <>
       {/* ─── Hero ─────────────────────────────────────────────────────── */}
@@ -68,12 +90,25 @@ export default function HomePage() {
       <section className={styles.about}>
         <div className={styles.aboutInner}>
           <div className={styles.aboutImage}>
-            <div
-              className={styles.imgPlaceholder}
-              aria-label="Artist photo — replace with actual image"
-            >
-              <span>Artist Photo</span>
-            </div>
+            {artistPhoto ? (
+              <div className={styles.artistImageWrap}>
+                <Image
+                  src={`/api/drive/${artistPhoto.id}`}
+                  alt="Beauty Within Ink — artist photo"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                  priority
+                />
+              </div>
+            ) : (
+              <div
+                className={styles.imgPlaceholder}
+                aria-label="Artist photo — add an image to your Google Drive artist folder"
+              >
+                <span>Artist Photo</span>
+              </div>
+            )}
           </div>
           <div className={styles.aboutContent}>
             <span className="section-label">About the Artist</span>
@@ -132,15 +167,29 @@ export default function HomePage() {
           <h2 className={styles.sectionTitle}>Portfolio Glimpse</h2>
           <div className="divider" />
           <div className={styles.previewGrid}>
-            {[1, 2, 3].map((n) => (
-              <div
-                key={n}
-                className={styles.previewItem}
-                aria-label={`Gallery preview ${n}`}
-              >
-                <span>Add Photo</span>
-              </div>
-            ))}
+            {previewItems.length > 0
+              ? previewItems.map((img) => (
+                  <div key={img.id} className={styles.previewItem}>
+                    <Image
+                      src={`/api/drive/${img.id}`}
+                      alt={img.name
+                        .replace(/\.[^.]+$/, "")
+                        .replace(/[-_]/g, " ")}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                ))
+              : [1, 2, 3].map((n) => (
+                  <div
+                    key={n}
+                    className={styles.previewItem}
+                    aria-label={`Gallery preview ${n}`}
+                  >
+                    <span>Add Photo</span>
+                  </div>
+                ))}
           </div>
           <div className={styles.previewCta}>
             <Link href="/gallery" className={styles.btnPrimary}>

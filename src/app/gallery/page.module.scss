@@ -87,21 +87,10 @@
   }
 }
 
-// ─── Placeholder (replace with <Image> when photos are available) ─────────────
-.placeholder {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    145deg,
-    $blush-light 0%,
-    $blush 42%,
-    rgba($rose, 0.5) 100%
-  );
-  @include flex-center;
-  color: $mauve;
-  font-family: $font-body;
-  font-size: 0.68rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  transition: transform 0.5s ease;
+// ─── Empty state ──────────────────────────────────────────────────────────────
+.empty {
+  text-align: center;
+  font-size: 1rem;
+  color: $gray;
+  padding: $spacing-xl 0;
 }

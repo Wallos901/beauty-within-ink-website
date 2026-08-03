@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export function proxy(request: NextRequest) {
   const password = process.env.SITE_PASSWORD;
@@ -9,25 +9,25 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const authHeader = request.headers.get('authorization') ?? '';
+  const authHeader = request.headers.get("authorization") ?? "";
 
-  if (authHeader.startsWith('Basic ')) {
-    const decoded  = Buffer.from(authHeader.slice(6), 'base64').toString();
+  if (authHeader.startsWith("Basic ")) {
+    const decoded = Buffer.from(authHeader.slice(6), "base64").toString();
     // Format is "username:password" — we only care about the password part
-    const submitted = decoded.split(':').slice(1).join(':');
+    const submitted = decoded.split(":").slice(1).join(":");
 
     if (submitted === password) {
       return NextResponse.next();
     }
   }
 
-  return new NextResponse('Protected — please enter the password.', {
-    status:  401,
-    headers: { 'WWW-Authenticate': 'Basic realm="Beauty Within Ink Dev"' },
+  return new NextResponse("Protected — please enter the password.", {
+    status: 401,
+    headers: { "WWW-Authenticate": 'Basic realm="Beauty Within Ink Dev"' },
   });
 }
 
 export const config = {
-  // Run on all routes except Next.js internals and static assets
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  // Exclude Next.js internals, static assets, and the internal image proxy API
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|api/drive).*)"],
 };

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { listDriveImages } from "@/lib/drive";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
@@ -7,9 +9,19 @@ export const metadata: Metadata = {
     "Browse fine line tattoo work by Beauty Within Ink — delicate botanicals, custom pieces, and minimalist designs.",
 };
 
-const GALLERY_ITEMS = Array.from({ length: 12 }, (_, i) => i + 1);
+// In production, revalidate every hour. In dev, always fetch fresh.
+export const revalidate = process.env.NODE_ENV === "development" ? 0 : 3600;
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  const folderId = process.env.DRIVE_GALLERY_FOLDER_ID;
+
+  const images = folderId
+    ? await listDriveImages(folderId).catch((err) => {
+        console.error("[gallery] Drive fetch failed:", err);
+        return [];
+      })
+    : [];
+
   return (
     <>
       {/* ─── Page hero ──────────────────────────────────────────────── */}
@@ -28,29 +40,23 @@ export default function GalleryPage() {
       {/* ─── Grid ───────────────────────────────────────────────────── */}
       <section className={styles.gridSection}>
         <div className={styles.gridInner}>
-          <div className={styles.grid}>
-            {GALLERY_ITEMS.map((n) => (
-              <div key={n} className={styles.gridItem}>
-                {/*
-                  Replace <div className={styles.placeholder}> with a Next.js
-                  <Image> component once you have real tattoo photos.
-                  e.g.:
+          {images.length === 0 ? (
+            <p className={styles.empty}>No photos yet — check back soon.</p>
+          ) : (
+            <div className={styles.grid}>
+              {images.map((img) => (
+                <div key={img.id} className={styles.gridItem}>
                   <Image
-                    src={`/gallery/tattoo-${n}.jpg`}
-                    alt="Tattoo description"
+                    src={`/api/drive/${img.id}`}
+                    alt={img.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ")}
                     fill
-                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    style={{ objectFit: "cover" }}
                   />
-                */}
-                <div
-                  className={styles.placeholder}
-                  aria-label={`Tattoo photo ${n} — add your image here`}
-                >
-                  <span>Add Photo</span>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </>

@@ -163,6 +163,20 @@
   }
 }
 
+// ─── Real artist photo (from Drive) ──────────────────────────────────────────
+.artistImageWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  @include mobile {
+    min-height: 240px;
+  }
+}
+
 .imgPlaceholder {
   width: 100%;
   height: 100%;
@@ -289,6 +303,7 @@
 }
 
 .previewItem {
+  position: relative;
   aspect-ratio: 3 / 4;
   background: linear-gradient(
     145deg,
