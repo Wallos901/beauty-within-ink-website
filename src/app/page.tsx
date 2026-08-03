@@ -39,17 +39,21 @@ export const revalidate = 0;
 export default async function HomePage() {
   // Fetch artist photo and gallery previews in parallel
   const [artistImages, galleryImages] = await Promise.all([
-    process.env.DRIVE_ARTIST_FOLDER_ID
-      ? listDriveImages(process.env.DRIVE_ARTIST_FOLDER_ID).catch((err) => {
-          console.error("[home] Drive artist fetch failed:", err);
-          return [];
-        })
+    process.env.NEXT_PUBLIC_DRIVE_ARTIST_FOLDER_ID
+      ? listDriveImages(process.env.NEXT_PUBLIC_DRIVE_ARTIST_FOLDER_ID).catch(
+          (err) => {
+            console.error("[home] Drive artist fetch failed:", err);
+            return [];
+          },
+        )
       : Promise.resolve([]),
-    process.env.DRIVE_GALLERY_FOLDER_ID
-      ? listDriveImages(process.env.DRIVE_GALLERY_FOLDER_ID).catch((err) => {
-          console.error("[home] Drive gallery fetch failed:", err);
-          return [];
-        })
+    process.env.NEXT_PUBLIC_DRIVE_GALLERY_FOLDER_ID
+      ? listDriveImages(process.env.NEXT_PUBLIC_DRIVE_GALLERY_FOLDER_ID).catch(
+          (err) => {
+            console.error("[home] Drive gallery fetch failed:", err);
+            return [];
+          },
+        )
       : Promise.resolve([]),
   ]);
 
