@@ -23,6 +23,15 @@ export const metadata: Metadata = {
   title: "Beauty Within Ink | Fine Line Tattoo Artist",
   description:
     "Delicate, intentional fine line tattoo art. Book your appointment and complete your consent form online.",
+  icons: {
+    icon: [
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", rel: "shortcut icon" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
